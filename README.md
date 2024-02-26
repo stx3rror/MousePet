@@ -19,6 +19,7 @@ distancia_seguridad: Distancia en píxeles que la ventana mantiene con el mouse.
 
 - Si la velocidad de movimiento de la mascota no se introduce su valor por defecto será 10.
 - Por defecto la velocidad es aleatoria debido a la linea [velocidad_random = random.randint(10,20)]
+- Si no se especifica tamaño la mascota tendra unas dimesiones de 100x100px
 
 Licencia:
 MIT

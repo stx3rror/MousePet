@@ -63,7 +63,11 @@ class VentanaPerseguirMouse:
         self.master.after(30, self.actualizar_posicion)
 
 #Comentar para quitar velocidad random (por defecto 10) cuanto mas alto mas lento es
-velocidad_random = random.randint(10,20)
+
+imagen = "stoat.png"
+ancho = 80#px
+alto = 40#px
+velocidad = random.randint(10,20)
 root = tk.Tk()
-mi_ventana = VentanaPerseguirMouse(root,"stoat.png",[80,40],velocidad_random)
+mi_ventana = VentanaPerseguirMouse(root,imagen,[ancho,alto],velocidad)
 root.mainloop()
