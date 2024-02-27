@@ -71,6 +71,7 @@ class VentanaPerseguirMouse:
         print("antigua_posicion_y: ",self.antigua_posicion_y)"""
 
         if self.nueva_posicion_x == self.antigua_posicion_x and self.nueva_posicion_y == self.antigua_posicion_y:
+            pass
             #print("Estoy parado")
             #Muestro imagen tumbado
 
