@@ -82,7 +82,7 @@ class VentanaPerseguirMouse:
         self.antigua_posicion_y = self.nueva_posicion_y
 
         # Actualizar la posición periódicamente
-        self.master.after(30, self.loop)
+        self.master.after(16, self.loop)
     
     def loop(self):
         self.actualizar_posicion()#Actualizamos la posicion de la mascota
