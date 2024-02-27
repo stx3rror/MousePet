@@ -2,11 +2,12 @@
 
 **Descripción:**
 
-Este código crea una ventana que persigue al mouse por la pantalla. La ventana muestra una imagen que se refleja horizontalmente cuando el mouse está a la izquierda de la ventana. La velocidad de movimiento de la ventana se puede ajustar.
+Este código te permite tener una pequeña distraccion en la pantalla, un bichito o una mascota que persigue tu mouse
 
 **Imagen**:
 
-La imagen predeterminada es un armiño (stoat.png). Puedes reemplazarla por tu propia imagen.
+La imagen predeterminada es un gato (cat.png) pero puedes poner la tuya a tu gusto, solo recuerda que
+ha de ser transparente y ha de estar mirando a la derecha (se volteará solo al cambiar la dirección)
 
 **Variables importantes**:
 
@@ -17,9 +18,11 @@ distancia_seguridad: Distancia en píxeles que la ventana mantiene con el mouse.
 
 **Notas:**
 
+- Si no se especifica el nombre.png de la mascota se buscara y elegira de forma aleatoria aquellas mascotas que se encuentren en la carpeta *pets*
+- Si no se especifica tamaño la mascota tendra unas dimesiones de 100x100px
 - Si la velocidad de movimiento de la mascota no se introduce su valor por defecto será 10.
 - Por defecto la velocidad es aleatoria debido a la linea [velocidad_random = random.randint(10,20)]
-- Si no se especifica tamaño la mascota tendra unas dimesiones de 100x100px
+
 
 Licencia:
 MIT

@@ -1,14 +1,14 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-import pyautogui, random
+import pyautogui, random, os
 
 class VentanaPerseguirMouse:
-    def __init__(self, master, imagen , dimensiones_imagen=[100,100], velocidad = 10):
+    def __init__(self, master, imagen , ancho = 100, alto = 100, velocidad = 10, distancia_seguridad = 20):
         
         self.master = master
         master.overrideredirect(True)  # Oculta los botones de maximizar, cerrar y minimizar
         master.attributes('-topmost', True)  # Mantener la ventana por encima de otras ventanas
-        self.distancia_seguridad = 20#px
+        self.distancia_seguridad = distancia_seguridad#px
         self.velocidad_movimiento = velocidad
     
         # Configurar el color que va a ser transparente, debe ser el mismo que el color del fondo de root
@@ -18,10 +18,13 @@ class VentanaPerseguirMouse:
         # Crear un lienzo con fondo transparente
         self.canvas = tk.Canvas(master, bg='grey', highlightthickness=0)
         self.canvas.pack(fill='both', expand=True)
+        if((ancho == 0 or ancho == "") or (alto == 0 or alto == "")):
+            ancho = 100
+            alto = 100
 
         # Cargar la imagen original
-        self.imagen_original = Image.open(imagen)  # Reemplaza LA RUTA DE LA IMAGEN
-        self.imagen_original = self.imagen_original.resize((dimensiones_imagen[0], dimensiones_imagen[1]))  # Cambia nuevo_ancho y nuevo_alto según tus necesidades
+        self.imagen_original = Image.open(self.cargar_mascota(imagen))  # Reemplaza LA RUTA DE LA IMAGEN
+        self.imagen_original = self.imagen_original.resize((ancho, alto))  # Cambia nuevo_ancho y nuevo_alto según tus necesidades
 
         # Crear una imagen espejo
         self.imagen_espejo = self.imagen_original.transpose(Image.FLIP_LEFT_RIGHT)
@@ -61,13 +64,26 @@ class VentanaPerseguirMouse:
 
         # Actualizar la posición periódicamente
         self.master.after(30, self.actualizar_posicion)
+    
+    def cargar_mascota(self,mascota_especifica):
+
+        if(mascota_especifica == " " or mascota_especifica == ""):
+            archivos_del_directorio = os.listdir(os.getcwd()+'\\pets')
+            imagenes_del_directorio = [archivo for indice, archivo in enumerate(archivos_del_directorio) if '.png' in archivo]
+            #Sacamos una imagen aleatoria de las imagenes de las pets            
+            mascota_elegida = imagenes_del_directorio[random.randint(0,len(imagenes_del_directorio)-1)]
+        else:
+            mascota_elegida = mascota_especifica
+
+        return os.getcwd() + '\\pets\\' + mascota_elegida
 
 #Comentar para quitar velocidad random (por defecto 10) cuanto mas alto mas lento es
 
-imagen = "stoat.png"
-ancho = 80#px
-alto = 40#px
+imagen = "cat.png"#Solo el nombre.png
+ancho = 50
+alto = 50
 velocidad = random.randint(10,20)
+distancia_seguridad = 40#px
 root = tk.Tk()
-mi_ventana = VentanaPerseguirMouse(root,imagen,[ancho,alto],velocidad)
+mi_ventana = VentanaPerseguirMouse(root, imagen, ancho, alto, velocidad, distancia_seguridad)
 root.mainloop()
