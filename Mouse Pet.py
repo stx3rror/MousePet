@@ -36,9 +36,15 @@ class VentanaPerseguirMouse:
         # Mostrar la imagen original en el lienzo
         self.canvas.create_image(0,0, anchor='nw', image=self.imagen_tk_original)
 
+        self.antigua_posicion_x = ''
+        self.antigua_posicion_y = ''
+
         self.actualizar_posicion()
 
     def actualizar_posicion(self):
+        
+        
+
         # Obtener las coordenadas del mouse
         self.x, self.y = pyautogui.position()
 
@@ -59,12 +65,28 @@ class VentanaPerseguirMouse:
         self.nueva_posicion_x = self.master.winfo_x() + (self.x + self.distancia_seguridad - self.master.winfo_x()) // self.velocidad_movimiento
         self.nueva_posicion_y = self.master.winfo_y() + (self.y + self.distancia_seguridad - self.master.winfo_y()) // self.velocidad_movimiento
 
+        """print("nueva_posicion_x: ",self.nueva_posicion_x)
+        print("nueva_posicion_y: ",self.nueva_posicion_y)
+        print("antigua_posicion_x: ",self.antigua_posicion_x)
+        print("antigua_posicion_y: ",self.antigua_posicion_y)"""
+
+        if self.nueva_posicion_x == self.antigua_posicion_x and self.nueva_posicion_y == self.antigua_posicion_y:
+            #print("Estoy parado")
+            #Muestro imagen tumbado
+
         # Mover la ventana
         self.master.geometry('+%d+%d' % (self.nueva_posicion_x, self.nueva_posicion_y))
 
+        self.antigua_posicion_x = self.nueva_posicion_x
+        self.antigua_posicion_y = self.nueva_posicion_y
+
         # Actualizar la posición periódicamente
-        self.master.after(30, self.actualizar_posicion)
+        self.master.after(30, self.loop)
     
+    def loop(self):
+        self.actualizar_posicion()#Actualizamos la posicion de la mascota
+        
+
     def cargar_mascota(self,mascota_especifica):
 
         if(mascota_especifica == " " or mascota_especifica == ""):
